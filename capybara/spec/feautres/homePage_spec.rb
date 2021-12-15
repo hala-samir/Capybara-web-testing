@@ -6,7 +6,6 @@ feature 'Visit The-Internet Home Page' do
   end
 
   scenario 'Title: Welcome to the-internet' do
-    expect(page).to have_content('Welcome to the-internet')
-    expect(page).to have_css('h1', text: 'Welcome to the-internet')
+    expect(page).to have_content('Automation Practice Website')
   end
 end
