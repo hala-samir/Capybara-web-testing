@@ -38,6 +38,7 @@ feature 'Registration' do
     click_button 'SubmitLogin'  
     expect(page).to have_content('Authentication failed.')
   end
+  
   scenario 'verify that user can retrieve password' do
     click_on 'Forgot your password?'
     find(:xpath,'//*[@id="email"]').set(@email)
