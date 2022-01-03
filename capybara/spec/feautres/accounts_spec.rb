@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Registration' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1519@email.com"
+    @email = "test1518@email.com"
     @password = "123456789"
   end
 
@@ -37,5 +37,11 @@ feature 'Registration' do
     fill_in 'passwd', :with => FFaker::Internet.password
     click_button 'SubmitLogin'  
     expect(page).to have_content('Authentication failed.')
+  end
+  scenario 'verify that user can retrieve password' do
+    click_on 'Forgot your password?'
+    find(:xpath,'//*[@id="email"]').set(@email)
+    find(:xpath,'//*[@id="form_forgotpassword"]/fieldset/p/button').click
+    expect(page).to have_content('A confirmation email has been sent to your address')
   end
 end
