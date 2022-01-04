@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Registration' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1518@email.com"
+    @email = "test1519@email.com"
     @password = "123456789"
   end
 
@@ -32,7 +32,7 @@ feature 'Registration' do
     expect(page).to have_content('Welcome to your account. Here you can manage all of your personal information and orders.')
   end
 
-  scenario 'Verify thatwrong credentials can not login' do
+  scenario 'Verify that wrong credentials can not login' do
     find(:xpath,'//*[@id="email"]').set(FFaker::Internet.email)
     fill_in 'passwd', :with => FFaker::Internet.password
     click_button 'SubmitLogin'  
