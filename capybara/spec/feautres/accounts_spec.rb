@@ -32,10 +32,17 @@ feature 'Registration' do
     expect(page).to have_content('Welcome to your account. Here you can manage all of your personal information and orders.')
   end
 
-  scenario 'Verify thatwrong credentials can not login' do
+  scenario 'Verify that wrong credentials can not login' do
     find(:xpath,'//*[@id="email"]').set(FFaker::Internet.email)
     fill_in 'passwd', :with => FFaker::Internet.password
     click_button 'SubmitLogin'  
     expect(page).to have_content('Authentication failed.')
+  end
+  
+  scenario 'verify that user can retrieve password' do
+    click_on 'Forgot your password?'
+    find(:xpath,'//*[@id="email"]').set(@email)
+    find(:xpath,'//*[@id="form_forgotpassword"]/fieldset/p/button').click
+    expect(page).to have_content('A confirmation email has been sent to your address')
   end
 end
