@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Registration' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1519@email.com"
+    @email = "test1525@email.com"
     @password = "123456789"
   end
 
