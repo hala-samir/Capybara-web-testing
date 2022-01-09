@@ -3,11 +3,9 @@ require 'spec_helper'
 feature 'Orders Page' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1517@email.com"
+    @email = "test1519@email.com"
     @password = "123456789"
-    find(:xpath,'//*[@id="email"]').set(@email)
-    fill_in 'passwd', :with => @password
-    click_button 'SubmitLogin'
+    login(@email,@password)
   end
 
   scenario 'verify that orders page is empty' do

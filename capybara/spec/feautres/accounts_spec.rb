@@ -26,16 +26,12 @@ feature 'Registration' do
   end
 
   scenario 'verify that user can sign in ' do
-    find(:xpath,'//*[@id="email"]').set(@email)
-    fill_in 'passwd', :with => @password
-    click_button 'SubmitLogin'  
+    login(@email,@password) 
     expect(page).to have_content('Welcome to your account. Here you can manage all of your personal information and orders.')
   end
 
   scenario 'Verify that wrong credentials can not login' do
-    find(:xpath,'//*[@id="email"]').set(FFaker::Internet.email)
-    fill_in 'passwd', :with => FFaker::Internet.password
-    click_button 'SubmitLogin'  
+    login(FFaker::Internet.email,FFaker::Internet.password)
     expect(page).to have_content('Authentication failed.')
   end
   
