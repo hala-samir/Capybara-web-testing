@@ -18,9 +18,8 @@ feature 'Visit The-Internet Home Page' do
     find(:xpath,'//*[@id="email"]').set(FFaker::Internet.email)
     find(:xpath,'//*[@id="id_contact"]/option[2]').click()
     within('.uploader') do
-        page.attach_file('fileUpload', './uploads/download.png', visible: false)
+      page.attach_file('fileUpload', './uploads/download.png', visible: false)
     end
-
     click_on 'submitMessage'
     expect(page).to have_content('Your message has been successfully sent to our team.')
   end
