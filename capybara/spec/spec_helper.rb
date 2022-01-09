@@ -12,7 +12,7 @@ Bundler.require
 # :selenium_chrome_headless # Selenium driving Chrome in a headless configuration
 # https://github.com/teamcapybara/capybara#selenium
 
-Capybara.default_driver = :selenium_chrome
+Capybara.default_driver = :selenium_chrome_headless
 Capybara.app_host = 'http://automationpractice.com/index.php'
 Capybara.default_max_wait_time = 10
 
@@ -28,3 +28,27 @@ def login(email, password)
   fill_in 'passwd', :with => password
   click_button 'SubmitLogin'  
 end
+
+def add_product_check_it_out
+  visit '/index.php?id_category=8&controller=category'
+  all('.button.ajax_add_to_cart_button>span:nth-child(1)').first().click()
+  click_on 'Proceed to checkout'
+  click_on 'Proceed to checkout'
+  click_on 'Proceed to checkout'
+  find(:xpath, '//*[@id="cgv"]', visible: false).click()
+  click_on 'Proceed to checkout'
+end
+
+def pay_by_bank_wire
+  click_on 'Pay by bank wire'
+end
+
+def pay_by_check
+  click_on 'Pay by check'
+ end
+
+def confirm_order
+  click_on 'I confirm my order'
+end
+
+
