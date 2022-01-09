@@ -12,14 +12,19 @@ Bundler.require
 # :selenium_chrome_headless # Selenium driving Chrome in a headless configuration
 # https://github.com/teamcapybara/capybara#selenium
 
-Capybara.default_driver = :selenium_chrome_headless
+Capybara.default_driver = :selenium_chrome
 Capybara.app_host = 'http://automationpractice.com/index.php'
 Capybara.default_max_wait_time = 10
 
 # Run using:
 # bundle exec rspec spec/features/login.rb --format documentation
-# ... Or...
-
 RSpec.configure do |config|
   config.formatter = :documentation
+end
+
+#new method for login to be used through tests
+def login(email, password)
+  find(:xpath,'//*[@id="email"]').set(email)
+  fill_in 'passwd', :with => password
+  click_button 'SubmitLogin'  
 end

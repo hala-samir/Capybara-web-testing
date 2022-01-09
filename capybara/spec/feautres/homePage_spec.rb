@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Visit The-Internet Home Page' do
+feature 'Home Page' do
   background do
     visit '/'
   end
