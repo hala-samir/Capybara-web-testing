@@ -45,10 +45,22 @@ end
 
 def pay_by_check
   click_on 'Pay by check'
- end
+end
 
 def confirm_order
   click_on 'I confirm my order'
+end
+
+def fill_profile_data(address, city,mobile,street)
+  find(:xpath,'//*[@id="center_column"]/div/div[1]/ul/li[3]').click()
+  expect(page).to have_content('Your addresses are listed below.')
+  click_on 'Add a new address'
+  fill_in 'address1', :with => address
+  fill_in 'city', :with => city
+  find(:xpath, '//*[@id="id_state"]/option[2]').click
+  fill_in 'postcode', :with => '00000'
+  fill_in 'phone_mobile', :with => mobile
+  fill_in 'alias', :with => street
 end
 
 

@@ -41,4 +41,15 @@ feature 'Registration' do
     find(:xpath,'//*[@id="form_forgotpassword"]/fieldset/p/button').click
     expect(page).to have_content('A confirmation email has been sent to your address')
   end
+
+  scenario 'verify that user can add new address' do
+    login(@email,@password)
+    @address = FFaker::Address.street_address
+    @city =  FFaker::Address.city 
+    @mobile = FFaker::PhoneNumberAU.mobile_phone_number
+    @street = FFaker::Address.street_address
+    fill_profile_data(@address, @city,@mobile,@street)
+    click_button 'submitAddress'
+    expect(page).to have_content(@address)
+  end
 end
