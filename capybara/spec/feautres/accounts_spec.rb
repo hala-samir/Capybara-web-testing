@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Registration' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1527@email.com"
+    @email = "test1534@email.com"
     @password = "123456789"
   end
 
@@ -51,5 +51,14 @@ feature 'Registration' do
     fill_profile_data(@address, @city,@mobile,@street)
     click_button 'submitAddress'
     expect(page).to have_content(@address)
+  end
+
+  scenario 'verify that user can delete address' do
+    login(@email,@password)
+    find(:xpath,'//*[@id="center_column"]/div/div[1]/ul/li[3]').click()
+    @addresses= all('.page-subheading').count()
+    find(:css,'.first_item.item.box>li.address_update > a:nth-child(2)').click()
+    page.driver.browser.switch_to.alert.accept
+    expect(page).to have_selector('.page-subheading', count: @addresses-1)
   end
 end
