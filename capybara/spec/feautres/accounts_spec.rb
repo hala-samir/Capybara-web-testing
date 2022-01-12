@@ -3,7 +3,7 @@ require 'spec_helper'
 feature '.account' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1536@email.com"
+    @email = "test1537@email.com"
     @password = "123456789"
   end
 
@@ -56,11 +56,21 @@ feature '.account' do
       expect(page).to have_content(@address)
     end
 
+    scenario 'update address' do
+      login(@email,@password)
+      @address = FFaker::Address.street_address
+      find(:xpath,'//*[@id="center_column"]/div/div[1]/ul/li[3]').click()
+      find(:xpath,'//*[@id="center_column"]/div[1]/div[1]/div[1]/ul/li[9]/a[1]').click()
+      fill_in 'address1', :with =>@address
+      click_button 'submitAddress'
+      expect(page).to have_content(@address)
+    end
+
     scenario 'delete address' do
       login(@email,@password)
       find(:xpath,'//*[@id="center_column"]/div/div[1]/ul/li[3]').click()
       @addresses= all('.page-subheading').count()
-      find(:css,'.first_item.item.box>li.address_update > a:nth-child(2)').click()
+      find(:css,'.first_item.item.box>li.address_update>a:nth-child(2)').click()
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_selector('.page-subheading', count: @addresses-1)
     end
