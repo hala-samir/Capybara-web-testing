@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-feature '.account' do
+feature 'account' do
   background do
     visit '/index.php?controller=authentication&back=my-account'
-    @email = "test1537@email.com"
+    @email = "test1540@email.com"
     @password = "123456789"
   end
 
-  context 'signup and login' do
-    scenario 'sign up' do 
+  describe 'signup and login' do
+    it 'sign up' do 
       fill_in 'email_create', :with => @email
       click_button 'SubmitCreate'
       fill_in 'customer_firstname', :with => FFaker::Name.first_name
@@ -56,7 +56,7 @@ feature '.account' do
       expect(page).to have_content(@address)
     end
 
-    scenario 'update address' do
+    example 'update address' do
       login(@email,@password)
       @address = FFaker::Address.street_address
       find(:xpath,'//*[@id="center_column"]/div/div[1]/ul/li[3]').click()
