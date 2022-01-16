@@ -30,5 +30,14 @@ feature 'Visit Product Page' do
       find(:css, '.shopping_cart>a').click()
       expect(page).to have_content'SHOPPING-CART SUMMARY'
     end
+
+    scenario 'sort products'do
+      visit '/index.php?controller=prices-drop'
+      select('Price: Lowest first',from:'selectProductSort', visible:false)
+      expect(page).to have_current_path('http://automationpractice.com/index.php?controller=prices-drop&orderby=price&orderway=asc')
+      @price1  = execute_script("Number($('.price.product-price')[1].textContent.replace(/[^0-9\.-]+/g,""));")
+      @price2 = execute_script('Number($(".price.product-price")[2].textContent.replace(/[^0-9\.-]+/g,""));')
+      expect(@price1).to be <= @price2
+    end
   end
 end
